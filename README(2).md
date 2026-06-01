@@ -1,82 +1,66 @@
-# 🧟 DARK INVASION — Hand Weapon Mini Game
+#  DARK INVASION — Hand Weapon Mini Game
 
-> Mini game tembak monster real-time berbasis deteksi tangan menggunakan OpenCV dan NumPy, dikembangkan untuk mata kuliah **Pengolahan Citra Video**.
+Nama : Athaya Khairani Adi
+NRP : 5024241007
+Mata Kuliah : Pengolahan Citra Video
 
----
+## Daftar Isi
 
-## 📑 Daftar Isi
-
-1. [Identitas](#-identitas)
-2. [Deskripsi Game](#-deskripsi-game)
-3. [Screenshot Game](#-screenshot-game)
-4. [Fitur Game](#-fitur-game)
-5. [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
-6. [Alur Program](#-alur-program)
-7. [Implementasi Teknis](#-implementasi-teknis)
-8. [Cara Menjalankan](#-cara-menjalankan)
-9. [Demo Video](#-demo-video)
-10. [Struktur Direktori](#-struktur-direktori)
-
----
-
-## 👤 Identitas
-
-| | |
-|---|---|
-| **Nama** | *Athaya Khairani Adi* |
-| **NRP** | *5024241007* |
-| **Mata Kuliah** | Pengolahan Citra Video |
+1. [Deskripsi Game](#-deskripsi-game)
+2. [Fitur Game dan Kontrol](#-fitur-game)
+3. [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
+4. [Alur Program](#-alur-program)
+5. [Implementasi Teknis](#-implementasi-teknis)
+6. [Cara Menjalankan](#-cara-menjalankan)
+7. [Dokumentasi](#-dokumentasi)
+8. [Demo Video](#-demo-video)
+9. [Struktur Direktori](#-struktur-direktori)
 
 ---
 
-## 📋 Deskripsi Game
+## Deskripsi Game
 
-**Dark Invasion** adalah mini game interaktif bertema pertahanan dari serangan monster yang dikendalikan sepenuhnya menggunakan **gerakan tangan** di depan webcam — tanpa keyboard, mouse, atau controller.
+**Dark Invasion** adalah mini game tembak monster berbasis webcam di mana pemain mengendalikan senjata menggunakan gerakan tangan secara real-time. Posisi tangan digunakan untuk mengarahkan senjata ke kiri atau kanan, sedangkan gerakan tangan pose menembak dikenali sebagai perintah untuk menembakkan peluru.
 
-Proyek ini merupakan implementasi nyata dari konsep **Gesture Detection** pada mata kuliah **Pengolahan Citra Video**. Inti dari proyek ini adalah bagaimana sebuah program mampu memahami dan menginterpretasikan gerakan tangan manusia secara real-time melalui kamera, lalu mengubahnya menjadi aksi di dalam game.
+Pada permainan ini, monster akan terus muncul dan bergerak menuju area pertahanan pemain. Pemain harus mengarahkan senjata dan menembak monster sebelum mereka berhasil mencapai garis pertahanan. Setiap monster yang berhasil dikalahkan akan menambah skor, sedangkan monster yang lolos akan mengurangi nyawa pemain. Monster bergerak dengan efek perspektif — mengecil saat jauh dan membesar saat mendekat — menciptakan ilusi kedalaman 3D tanpa engine game apapun.
 
-Alih-alih menggunakan library deteksi tangan seperti MediaPipe, seluruh pipeline deteksi dibangun dari awal menggunakan teknik pengolahan citra klasik:
+Game dikembangkan **hanya menggunakan Python, OpenCV, dan NumPy** tanpa framework atau game engine eksternal.
 
+Game ini menerapkan berapa konsep yaitu : 
 - **Segmentasi warna kulit** di ruang warna HSV untuk mengisolasi area tangan dari background
 - **Operasi morfologi manual** (Opening & Closing) menggunakan NumPy untuk membersihkan hasil segmentasi
 - **Analisis kontur** untuk menemukan posisi dan pergerakan tangan
 - **Gesture recognition** berbasis perubahan posisi titik tertinggi tangan antar frame untuk menentukan kapan pemain "menembak"
 - **Alpha blending manual** untuk menempatkan sprite senjata tepat mengikuti posisi tangan secara real-time
 
-Pemain menggerakkan tangan kiri-kanan untuk mengarahkan senjata, dan melakukan gerakan tangan tiba-tiba (hentakan) untuk menembakkan peluru ke arah monster yang terus berdatangan dari kejauhan. Monster bergerak dengan efek perspektif — mengecil saat jauh dan membesar saat mendekat — menciptakan ilusi kedalaman 3D tanpa engine game apapun.
-
-Game dikembangkan **hanya menggunakan Python, OpenCV, dan NumPy** tanpa framework atau game engine eksternal.
-
 ---
 
-## 📸 Screenshot Game
-
-> *(Tambahkan screenshot game di sini — bisa berupa tampilan menu, gameplay, dan game over)*
-
-| Menu Utama | Gameplay | Game Over |
-|---|---|---|
-| *(screenshot)* | *(screenshot)* | *(screenshot)* |
-
----
-
-## 🎮 Fitur Game
+## Fitur Game
 
 | Fitur | Keterangan |
 |---|---|
-| **Gesture Detection** | Deteksi gerakan tangan secara real-time: `SHOOT` (hentakan cepat) dan `HOLD` (diam) |
-| **Second Object** | Monster sebagai objek musuh yang bergerak mendekati pemain dengan efek perspektif |
+| **Gesture Detection** | Deteksi gerakan tangan secara real-time: `SHOOT` (adanya pergerakan) dan `HOLD` (diam) |
+| **Second Object** | Monster sebagai objek musuh yang bergerak mendekati pemain dengan efek perspektif|
 | **Scoring System** | Skor bertambah setiap monster berhasil ditembak |
 | **Health System** | 5 nyawa, berkurang setiap monster melewati garis pertahanan |
 | **Weapon Overlay** | Sprite senjata mengikuti posisi tangan secara real-time via alpha blending |
 | **Animasi Monster** | Sprite animasi multi-frame dari PNG sequence |
-| **Efek Perspektif** | Monster mengecil di kejauhan dan membesar serta mempercepat saat mendekat |
-| **Efek Kabut** | Monster tampak transparan saat jauh, makin solid saat mendekat |
-| **Anti-Ghost Shoot** | Flag `hand_initialized` mencegah tembakan tidak sengaja di frame pertama |
-| **Smoothing Posisi** | Exponential moving average untuk pergerakan senjata yang halus |
+| **Efek Perspektif Monster** | Monster mengecil di kejauhan dan membesar serta mempercepat saat mendekat |
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+### Kontrol
+| Aksi | Cara |
+|---|---|
+| Mulai game | Tekan `SPACE` di menu |
+| Arahkan senjata | Gerakkan tangan kiri-kanan di zona deteksi (kotak pink) |
+| Tembak | Pose tangan menembak (adanya pergerakan tangan) |
+| Restart | Tekan `R` saat Game Over |
+| Keluar | Tekan `ESC` |
+
+---
+
+## Teknologi yang Digunakan
 
 | Library | Fungsi |
 |---|---|
@@ -85,293 +69,62 @@ Game dikembangkan **hanya menggunakan Python, OpenCV, dan NumPy** tanpa framewor
 | **NumPy** | Seluruh pemrosesan piksel, operasi morfologi, dan kalkulasi matematis |
 | **os** *(built-in)* | Membaca direktori frame monster |
 
-> ⚠️ **Tidak menggunakan** library eksternal lain seperti Pygame, PIL/Pillow, TensorFlow, MediaPipe, atau framework game apapun di dalam program utama.
+> **Tidak menggunakan** library eksternal lain seperti Pygame, PIL/Pillow, TensorFlow, MediaPipe, atau framework game apapun di dalam program utama.
 
 ---
 
-## 📊 Alur Program
+## Alur Program
+1. **Webcam Capture**  
+   Mengambil frame video secara real-time dari webcam.
 
-```
-┌─────────────────────────────────────────────────────────┐
-│                     INISIALISASI                        │
-│  Load background, weapon sprite, monster frames (PNG)   │
-│  Buka koneksi webcam (cv2.VideoCapture)                 │
-└──────────────────────────┬──────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────┐
-│                   LOOP UTAMA (per frame)                │
-└──────────────────────────┬──────────────────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │        BACA FRAME WEBCAM        │
-          │   cap.read() → flip horizontal  │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │         CROP ROI (zona tangan)  │
-          │   70%-100% tinggi frame         │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │      SKIN COLOR MASKING         │
-          │   BGR → HSV → inRange (mask)    │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │    MORFOLOGI MANUAL (NumPy)      │
-          │  Opening: Erode → Dilate        │
-          │  Closing: Dilate → Erode        │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │      DETEKSI KONTUR TANGAN      │
-          │   findContours → area terbesar  │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │      GESTURE RECOGNITION        │
-          │   Hitung movement topmost point │
-          │   movement > threshold → SHOOT  │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │       UPDATE GAME STATE         │
-          │  Spawn monster, gerak peluru,   │
-          │  cek tumbukan, hitung skor,     │
-          │  cek health → game over         │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │         RENDER FRAME            │
-          │  Background + Senjata (alpha    │
-          │  blending) + Monster + HUD      │
-          └────────────────┬────────────────┘
-                           │
-          ┌────────────────▼────────────────┐
-          │     TAMPILKAN (cv2.imshow)      │
-          │  Window: Game | Frame | Mask    │
-          └────────────────┬────────────────┘
-                           │
-                    ESC ───┘ (keluar)
-```
+2. **Flip Frame & Crop ROI**  
+   Membalik frame secara horizontal agar pergerakan tangan sesuai dengan arah gerakan pemain, kemudian mengambil area deteksi tangan (Region of Interest).
+
+3. **HSV Conversion**  
+   Mengubah ruang warna frame dari BGR ke HSV.
+
+4. **Skin Color Masking**  
+   Melakukan segmentasi warna kulit untuk memperoleh area kandidat tangan.
+
+5. **Manual Morphology (Opening & Closing)**  
+   Membersihkan noise dan menutup lubang pada mask menggunakan operasi morfologi manual berbasis NumPy.
+
+6. **Hand Contour Detection**  
+   Mencari kontur tangan dan menentukan posisi tangan yang terdeteksi.
+
+7. **Gesture Recognition**  
+   Menganalisis pergerakan tangan untuk mengenali gesture menembak (*SHOOT*) atau diam (*HOLD*).
+
+8. **Weapon Position Update**  
+   Memperbarui posisi senjata agar mengikuti posisi tangan secara real-time.
+
+9. **Game Logic Update**  
+   Memperbarui seluruh objek permainan, termasuk peluru, monster, skor, dan nyawa pemain.
+
+10. **Render Game Objects**  
+    Menggambar background, senjata, monster, skor, dan nyawa ke dalam frame game.
+
+11. **Display Frame**  
+    Menampilkan hasil akhir permainan ke layar dan mengulangi proses untuk frame berikutnya.
+---
+
+## Implementasi Teknis
+| Komponen | Implementasi |
+|-----------|-----------|
+| **Akuisisi Video** | Webcam digunakan sebagai sumber input utama. Frame video dibaca secara real-time menggunakan OpenCV untuk mendeteksi tangan pemain. |
+| **Segmentasi Tangan** | Tangan dideteksi menggunakan metode skin color masking pada ruang warna HSV untuk memisahkan area tangan dari latar belakang. |
+| **Operasi Morfologi** | Opening dan Closing diimplementasikan secara manual menggunakan NumPy untuk menghilangkan noise dan memperbaiki hasil segmentasi. |
+| **Deteksi Tangan** | Kontur terbesar pada mask digunakan untuk menentukan posisi tangan yang akan mengendalikan senjata. |
+| **Weapon Overlay** | Sprite senjata ditempelkan ke layar menggunakan teknik alpha blending sehingga dapat mengikuti posisi tangan secara real-time. |
+| **Gesture Recognition** | Gerakan tangan dianalisis untuk mengenali gesture menembak (*SHOOT*) berdasarkan perubahan posisi tangan antar frame. |
+| **Second Object** | Monster berfungsi sebagai objek musuh yang muncul secara berkala dan bergerak menuju area pertahanan pemain. |
+| **Scoring System** | Skor bertambah setiap kali monster berhasil ditembak oleh pemain. |
+| **Health System** | Nyawa pemain akan berkurang apabila monster berhasil mencapai area pertahanan. |
+| **Rendering** | Background, senjata, monster, skor, dan nyawa dirender secara real-time pada setiap frame permainan. |
 
 ---
 
-## 🔧 Implementasi Teknis
-
-### 1. Konfigurasi Webcam — `cv2.VideoCapture`
-
-Webcam dibuka menggunakan `cv2.VideoCapture(0)` dan frame dibaca setiap iterasi loop. Frame di-flip horizontal agar terasa seperti cermin dan intuitif bagi pemain:
-
-```python
-cap = cv2.VideoCapture(0)
-
-ret, frame = cap.read()
-frame = cv2.flip(frame, 1)
-```
-
-Aset gambar (background dan weapon) dimuat dengan `cv2.imread()`, dan seluruh tampilan dirender dengan `cv2.imshow()`:
-
-```python
-BACKGROUND = cv2.imread("PROJECT/backgroundgame.png")
-weapon = cv2.imread("PROJECT/weapon.png", cv2.IMREAD_UNCHANGED)
-
-cv2.imshow("Game", game)
-cv2.imshow("Frame", frame_display)
-cv2.imshow("Mask", mask)
-```
-
----
-
-### 2. Skin Color Masking — Segmentasi HSV
-
-Tangan dideteksi menggunakan **segmentasi berbasis warna kulit** di ruang warna HSV. Deteksi difokuskan hanya pada ROI (Region of Interest) bagian bawah frame (70%–100%) untuk efisiensi dan mengurangi false detection:
-
-```python
-SKIN_LOWER = np.array([0, 30, 60], dtype=np.uint8)
-SKIN_UPPER = np.array([35, 255, 255], dtype=np.uint8)
-
-# Batasi zona deteksi
-zone_y1 = int(h * 0.7)
-zone_y2 = h
-roi = frame_small[zone_y1:zone_y2, zone_x1:zone_x2]
-
-# Konversi ke HSV dan buat mask
-hsv = cv2.cvtColor(roi_small, cv2.COLOR_BGR2HSV)
-mask = cv2.inRange(hsv, SKIN_LOWER, SKIN_UPPER)
-```
-
-Seluruh manipulasi piksel menggunakan operasi array NumPy secara langsung, tanpa fungsi segmentasi eksternal.
-
----
-
-### 3. Operasi Morfologi Manual — Opening & Closing dengan NumPy
-
-Seluruh operasi morfologi diimplementasikan **dari awal menggunakan NumPy** dengan `sliding_window_view`, tanpa menggunakan `cv2.erode` atau `cv2.dilate`:
-
-**Fungsi Erode Manual** — mengambil nilai minimum di setiap window:
-```python
-def manual_erode(binary_img, kernel_size=3):
-    pad = kernel_size // 2
-    padded = np.pad(binary_img, pad, mode='constant')
-    windows = sliding_window_view(padded, (kernel_size, kernel_size))
-    return windows.min(axis=(2, 3)).astype(np.uint8)
-```
-
-**Fungsi Dilate Manual** — mengambil nilai maksimum di setiap window:
-```python
-def manual_dilate(binary_img, kernel_size=3):
-    pad = kernel_size // 2
-    padded = np.pad(binary_img, pad, mode='constant')
-    windows = sliding_window_view(padded, (kernel_size, kernel_size))
-    return windows.max(axis=(2, 3)).astype(np.uint8)
-```
-
-**Pipeline morfologi lengkap (Opening + Closing):**
-```python
-# Opening (Erode → Dilate): hilangkan noise kecil di luar area tangan
-mask = manual_erode(mask, 3)
-mask = manual_dilate(mask, 3)
-
-# Closing (Dilate → Erode): tutup lubang/celah di dalam area tangan
-mask = manual_dilate(mask, 3)
-mask = manual_erode(mask, 3)
-```
-
-| Operasi | Urutan | Fungsi |
-|---|---|---|
-| **Opening** | Erode → Dilate | Menghilangkan noise kecil dan piksel asing di luar area tangan |
-| **Closing** | Dilate → Erode | Menutup lubang dan celah di dalam area tangan yang terdeteksi |
-
----
-
-### 4. Weapon Sprite Overlay — Alpha Blending Manual
-
-Sprite senjata (format RGBA) ditempatkan di atas background game menggunakan **alpha blending manual** berbasis NumPy:
-
-```python
-def overlay_rgba(frame, sprite, x, y):
-    h, w = sprite.shape[:2]
-    x = max(0, min(x, frame.shape[1] - w))
-    y = max(0, min(y, frame.shape[0] - h))
-
-    alpha = sprite[:, :, 3] / 255.0  # normalisasi alpha [0.0 - 1.0]
-
-    for c in range(3):
-        frame[y:y+h, x:x+w, c] = (
-            alpha * sprite[:, :, c] +
-            (1 - alpha) * frame[y:y+h, x:x+w, c]
-        )
-    return frame
-```
-
-**Rumus:** `output = α × foreground + (1 − α) × background`
-
-Posisi senjata mengikuti posisi horizontal tangan secara real-time, dipetakan dari koordinat ROI ke koordinat layar game (800px):
-
-```python
-game_x = int((raw_x / (zone_x2 - zone_x1)) * 800)
-weapon_x = int(np.clip(game_x - 10, 0, 800 - weapon.shape[1]))
-```
-
----
-
-### 5. Gesture Recognition — Deteksi Gerakan SHOOT
-
-Gesture dikenali berdasarkan **perubahan posisi titik teratas tangan** (topmost point) antar frame. Pendekatan ini sederhana namun efektif untuk mendeteksi hentakan/gerakan tiba-tiba:
-
-```python
-# Cari titik tertinggi tangan (y terkecil)
-topmost = tuple(hand[hand[:,:,1].argmin()][0])
-
-# Hitung pergerakan dari frame sebelumnya
-dx = current_top_x - prev_top_x
-dy = current_top_y - prev_top_y
-movement = np.sqrt(dx*dx + dy*dy)
-
-# Klasifikasi gesture
-gesture = "SHOOT" if movement > movement_threshold else "HOLD"
-```
-
-**Flag `hand_initialized`** mencegah tembakan tidak sengaja saat tangan pertama kali terdeteksi:
-
-```python
-if not hand_initialized:
-    # Frame pertama: simpan posisi tanpa klasifikasi gesture
-    prev_top_x = current_top_x
-    prev_top_y = current_top_y
-    hand_initialized = True
-else:
-    # Frame berikutnya: hitung movement dan klasifikasikan
-    dx = current_top_x - prev_top_x
-    dy = current_top_y - prev_top_y
-    movement = np.sqrt(dx*dx + dy*dy)
-    gesture = "SHOOT" if movement > movement_threshold else "HOLD"
-```
-
-**Exponential Moving Average** untuk smoothing posisi senjata agar tidak patah-patah:
-```python
-cx = int(0.7 * prev_cx + 0.3 * cx)
-cy = int(0.7 * prev_cy + 0.3 * cy)
-```
-
-| Gesture | Kondisi | Efek dalam Game |
-|---|---|---|
-| `HOLD` | Tangan diam atau bergerak pelan | Senjata mengikuti posisi tangan |
-| `SHOOT` | Gerakan tangan tiba-tiba melebihi threshold | Peluru ditembakkan dari ujung senjata |
-
----
-
-### 6. Scoring System & Collision Detection
-
-Skor bertambah saat peluru mengenai monster. Tumbukan dideteksi menggunakan jarak Manhattan berbasis ukuran monster (skala dinamis):
-
-```python
-size = int(60 * monster.scale)
-
-if abs(bullet.x - monster.x) < size and abs(bullet.y - monster.y) < size:
-    bullets.remove(bullet)
-    monsters.remove(monster)
-    score += 1
-    break
-```
-
-Health system berkurang saat monster melewati garis pertahanan:
-```python
-monster_bottom = monster.y + int(60 * monster.scale)
-if monster_bottom >= wall_y:
-    monsters.remove(monster)
-    player_health = max(0, player_health - 1)
-    if player_health == 0:
-        game_over = True
-```
-
----
-
-### 7. Sistem Perspektif Monster
-
-Monster di-spawn dari tengah background dengan skala kecil, lalu membesar dan mempercepat seiring mendekat — menciptakan ilusi kedalaman 3D:
-
-```python
-self.scale += self.speed             # membesar tiap frame
-self.y += int(3 * self.scale)        # kecepatan turun proporsional dengan skala
-self.x += (self.target_x - self.x) * 0.015  # menyebar ke target secara smooth
-
-# efek kabut: makin transparan saat masih jauh
-alpha *= min(self.scale * 4, 1.0)
-```
-
-Monster diurutkan berdasarkan skala sebelum digambar agar yang jauh (kecil) tergambar lebih dulu (depth sorting):
-```python
-monsters.sort(key=lambda m: m.scale)
-for monster in monsters:
-    monster.draw(game)
-```
-
----
-
-## ⚙️ Cara Menjalankan
+##  Cara Menjalankan
 
 ### 1. Install dependencies
 ```bash
@@ -380,10 +133,10 @@ pip install opencv-python numpy
 
 ### 2. Siapkan aset monster (jalankan sekali saja)
 
-Karena OpenCV tidak mendukung alpha channel GIF secara native, GIF monster perlu dikonversi ke PNG frames terlebih dahulu menggunakan script berikut yang dijalankan **sekali secara offline**:
+Karena OpenCV tidak mendukung alpha channel GIF secara native, GIF monster perlu dikonversi ke PNG frames terlebih dahulu menggunakan script berikut yang dijalankan :
 
 ```bash
-pip install Pillow   # hanya untuk konversi aset, tidak dipakai di game
+pip install Pillow  
 python convert_gif.py
 ```
 
@@ -410,44 +163,43 @@ print(f"Selesai! {gif.n_frames} frame tersimpan.")
 python main.py
 ```
 
-### 4. Kontrol
-
-| Aksi | Cara |
-|---|---|
-| Mulai game | Tekan `SPACE` di menu |
-| Arahkan senjata | Gerakkan tangan kiri-kanan di dalam zona deteksi (kotak pink) |
-| Tembak | Hentakkan tangan dengan cepat |
-| Restart | Tekan `R` saat Game Over |
-| Keluar | Tekan `ESC` |
-
-### 5. Tips Penggunaan
-
+### 4. Tips Penggunaan
 - Pastikan pencahayaan ruangan cukup terang
 - Posisikan tangan di dalam zona deteksi yang ditandai kotak pink di bagian bawah window `Frame`
 - Gunakan background yang kontras dengan warna kulit untuk hasil deteksi terbaik
 - Tiga window akan terbuka: `Game` (tampilan utama), `Frame` (kamera), `Mask` (debug deteksi)
 
 ---
+## Dokumemtasi
 
-## 🎥 Demo Video
-
-> 🔗 [Link Video Demonstrasi](#) *(tambahkan link YouTube / Google Drive di sini)*
-
+<p align="center">
+  <img src="screenshots/menu.png" width="250">
+  <img src="screenshots/gameplay.png" width="250">
+  <img src="screenshots/gameover.png" width="250">
+</p>
 ---
 
-## 📁 Struktur Direktori
+## Video Demo
+Berikut ink youtube video demontrasi game : 
+[Video Demonstrasi Dark Invasion](https://youtu.be/dQw4w9WgXcQ)
+---
 
+## Struktur Direktori
 ```
-📦 dark-invasion/
-├── 📄 main.py                    # File utama game (OpenCV + NumPy only)
-├── 📄 convert_gif.py             # Script konversi GIF → PNG (dijalankan sekali)
-├── 📄 README.md                  # Dokumentasi proyek
-└── 📂 PROJECT/
-    ├── 🖼️  backgroundgame.png    # Background game (800x600)
-    ├── 🖼️  weapon.png            # Sprite senjata format RGBA
-    ├── 🎞️  monster.gif           # Animasi monster asli
-    └── 📂 monster_frames/        # PNG per frame hasil konversi (alpha transparan)
-        ├── frame_000.png
-        ├── frame_001.png
-        └── ...
+Project_HandweaponGame/
+├── main.py
+├── convert_gif.py
+├── README.md
+├── assets/
+│   ├── backgroundgame.png
+│   ├── weapon.png
+│   ├── monster.gif
+│   └── monster_frames/
+│       ├── frame_000.png
+│       ├── frame_001.png
+│       └── ...
+└── documentation/
+    ├── menu.png
+    ├── gameplay.png
+    └── gameover.png
 ```
