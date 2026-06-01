@@ -7,7 +7,7 @@ from numpy.lib.stride_tricks import sliding_window_view
 SKIN_LOWER = np.array([0, 30, 60], dtype=np.uint8)
 SKIN_UPPER = np.array([35, 255, 255], dtype=np.uint8)
 
-BACKGROUND = cv2.imread("PROJECT/backgroundgame.png")
+BACKGROUND = cv2.imread("assets/backgroundgame.png")
 BACKGROUND = cv2.resize(BACKGROUND, (800, 600))
 
 cap = cv2.VideoCapture(0)
@@ -18,7 +18,7 @@ cv2.namedWindow("Frame", cv2.WINDOW_NORMAL)
 
 # gif zombie
 zombie_frames = []
-frames_dir = "PROJECT/zombie_frames"
+frames_dir = "documentation/zombie_frames"
 
 frame_files = sorted([
     f for f in os.listdir(frames_dir)
@@ -31,7 +31,7 @@ for fname in frame_files:
     if frame is not None:
         zombie_frames.append(frame)
 
-weapon = cv2.imread("PROJECT/weapon.png", cv2.IMREAD_UNCHANGED)
+weapon = cv2.imread("asssets/weapon.png", cv2.IMREAD_UNCHANGED)
 weapon = cv2.resize(
     weapon,
     (
@@ -282,7 +282,7 @@ while True:
                 current_top_x = topmost[0]
                 current_top_y = topmost[1]
 
-               # SESUDAH
+        
                 if not hand_initialized:
                     # frame pertama tangan terdeteksi, langsung set posisi tanpa hitung movement
                     prev_top_x = current_top_x
