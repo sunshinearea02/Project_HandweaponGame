@@ -37,29 +37,28 @@ Project ini dikembangkan **murni menggunakan Python, OpenCV, dan NumPy**, tanpa 
 - Webcam (cv2.VideoCapture)
 
 ---
-## Struktur Folder
+## 📁 Struktur Folder
 Handweapon-Mini-Game/
 │
 ├── main.py
 ├── README.md
 │
 ├── assets/
-│   ├── backgroundgame.png
-│   ├── weapon.png
-│   │
-│   └── zombie_frames/
-│       ├── frame_1.png
-│       ├── frame_2.png
-│       ├── frame_3.png
-│       └── ...
+│ ├── backgroundgame.png
+│ ├── weapon.png
+│ └── zombie_frames/
+│ ├── frame_1.png
+│ ├── frame_2.png
+│ ├── frame_3.png
+│ └── ...
 │
 ├── screenshots/
-│   ├── gameplay.png
-│   ├── menu.png
-│   └── gameover.png
+│ ├── gameplay.png
+│ ├── menu.png
+│ └── gameover.png
 │
 └── demo/
-    └── link drive
+└── video_link.txt
 
 ## Cara Menjalankan
 ### 1. Install dependency
