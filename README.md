@@ -37,7 +37,8 @@ Project ini dikembangkan **murni menggunakan Python, OpenCV, dan NumPy**, tanpa 
 - Webcam (cv2.VideoCapture)
 
 ---
-## 📁 Struktur Folder
+## Struktur Folder
+```bash
 Handweapon-Mini-Game/
 │
 ├── main.py
@@ -58,7 +59,8 @@ Handweapon-Mini-Game/
 │ └── gameover.png
 │
 └── demo/
-└── video_link.txt
+└── link drive video
+```
 
 ## Cara Menjalankan
 ### 1. Install dependency
