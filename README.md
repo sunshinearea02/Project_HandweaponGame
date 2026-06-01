@@ -23,17 +23,6 @@
 
 Pada permainan ini, monster akan terus muncul dan bergerak menuju area pertahanan pemain. Pemain harus mengarahkan senjata dan menembak monster sebelum mereka berhasil mencapai garis pertahanan. Setiap monster yang berhasil dikalahkan akan menambah skor, sedangkan monster yang lolos akan mengurangi nyawa pemain. Monster bergerak dengan efek perspektif — mengecil saat jauh dan membesar saat mendekat — menciptakan ilusi kedalaman 3D tanpa engine game apapun.
 
-Game ini menerapkan beberapa konsep utama, yaitu:
-
-- **Segmentasi warna kulit berbasis HSV** untuk mengisolasi area tangan dari latar belakang.
-- **Operasi morfologi manual (Opening dan Closing)** menggunakan NumPy untuk menghilangkan noise dan memperbaiki hasil segmentasi.
-- **Analisis kontur** untuk menentukan posisi serta pergerakan tangan yang terdeteksi.
-- **Gesture Recognition** berbasis perubahan posisi tangan antar frame untuk mendeteksi aksi menembak (*SHOOT*).
-- **Alpha Blending Manual** untuk menempatkan sprite senjata agar dapat mengikuti posisi tangan secara real-time.
-- **Sistem skor (Scoring System)** yang memberikan poin setiap kali monster berhasil dikalahkan.
-- **Interaksi dengan objek permainan (Second Object)** berupa monster yang berfungsi sebagai target sekaligus musuh dalam permainan.
----
-
 ## Fitur Game
 
 | Fitur              | Deskripsi                                                               |
@@ -189,7 +178,7 @@ Monster berfungsi sebagai target utama dalam permainan. Setiap monster memiliki 
 monster.z += monster.speed
 ```
 
-Selain bergerak mendekati pemain, ukuran monster juga berubah berdasarkan jarak sehingga menghasilkan efek perspektif sederhana yang memberikan kesan kedalaman visual.
+Selain bergerak mendekati pemain, ukuran monster juga berubah berdasarkan jarak sehingga menghasilkan efek perspektif
 
 ---
 
