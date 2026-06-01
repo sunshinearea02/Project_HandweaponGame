@@ -31,7 +31,7 @@ Project ini dikembangkan **murni menggunakan Python, OpenCV, dan NumPy**, tanpa 
 ---
 
 ## Teknologi yang Digunakan
-- Python 3
+- Python
 - OpenCV (cv2)
 - NumPy
 - Webcam (cv2.VideoCapture)
