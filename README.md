@@ -111,20 +111,111 @@ Game ini menerapkan beberapa konsep utama, yaitu:
 
 ## Implementasi Teknis
 
-| Komponen            | Deskripsi                                                                    |
-| ------------------- | ---------------------------------------------------------------------------- |
-| Akuisisi Video      | Membaca frame webcam secara real-time menggunakan OpenCV.                    |
-| Segmentasi HSV      | Mendeteksi area tangan berdasarkan warna kulit pada ruang warna HSV.         |
-| Morfologi Manual    | Membersihkan mask menggunakan Opening dan Closing berbasis NumPy.            |
-| Deteksi Tangan      | Menentukan posisi tangan dari kontur yang terdeteksi.                        |
-| Weapon Overlay      | Menampilkan senjata yang mengikuti posisi tangan menggunakan alpha blending. |
-| Gesture Recognition | Mengenali gerakan menembak berdasarkan perubahan posisi tangan.              |
-| Second Object       | Monster sebagai target yang harus dikalahkan pemain.                         |
-| Scoring System      | Menambahkan skor saat monster berhasil ditembak.                             |
-| Health System       | Mengurangi nyawa pemain ketika monster mencapai area pertahanan.             |
-| Rendering           | Menampilkan seluruh elemen permainan secara real-time.                       |
+### Segmentasi Warna Kulit
+
+Deteksi tangan dilakukan menggunakan ruang warna HSV karena lebih stabil terhadap perubahan pencahayaan dibandingkan RGB. Frame webcam dikonversi ke HSV kemudian difilter menggunakan rentang warna kulit sehingga menghasilkan citra biner (*mask*).
+
+```python
+hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+mask = cv2.inRange(hsv, SKIN_LOWER, SKIN_UPPER)
+```
+
+Area berwarna putih pada mask dianggap sebagai tangan, sedangkan area hitam dianggap sebagai background.
 
 ---
+
+### Operasi Morfologi Manual
+
+Hasil segmentasi warna kulit sering kali masih mengandung noise atau lubang kecil pada objek tangan. Oleh karena itu, diterapkan operasi morfologi manual menggunakan NumPy.
+
+```python
+mask = erode(mask, kernel)
+mask = dilate(mask, kernel)
+```
+
+Operasi **Opening (Erode → Dilate)** digunakan untuk menghilangkan noise kecil pada citra biner. Setelah itu, dilakukan **Closing (Dilate → Erode)** untuk menutup lubang yang masih terdapat pada area tangan sehingga bentuk objek menjadi lebih utuh dan mudah dideteksi.
+
+---
+
+### Deteksi Tangan
+
+Setelah memperoleh mask yang bersih, sistem mencari kontur untuk menentukan lokasi tangan yang terdeteksi.
+
+```python
+contours, _ = cv2.findContours(
+    mask,
+    cv2.RETR_EXTERNAL,
+    cv2.CHAIN_APPROX_SIMPLE
+)
+```
+
+Kontur terbesar diasumsikan sebagai tangan dan digunakan untuk memperoleh koordinat posisi yang akan mengendalikan senjata di dalam permainan.
+
+---
+
+### Gesture Recognition
+
+Aksi menembak ditentukan berdasarkan perubahan posisi tangan antar frame. Sistem membandingkan posisi tangan saat ini dengan posisi pada frame sebelumnya untuk menghitung besar pergerakan.
+
+```python
+speed = abs(cy - prev_cy)
+
+if speed > SHOOT_THRESHOLD:
+    shoot()
+```
+
+Apabila perpindahan posisi melebihi nilai ambang yang ditentukan, sistem akan menganggap pemain melakukan gesture menembak (*SHOOT*) dan peluru akan dibuat.
+
+---
+
+### Weapon Overlay
+
+Sprite senjata ditempelkan ke frame permainan menggunakan teknik **alpha blending manual** sehingga dapat menyatu dengan background tanpa menghilangkan transparansi gambar.
+
+```python
+result = alpha * weapon +
+         (1 - alpha) * background
+```
+
+Posisi senjata diperbarui pada setiap frame agar selalu mengikuti posisi tangan yang terdeteksi secara real-time.
+
+---
+
+### Second Object (Monster)
+
+Monster berfungsi sebagai target utama dalam permainan. Setiap monster memiliki posisi dan kecepatan yang diperbarui secara terus-menerus selama permainan berlangsung.
+
+```python
+monster.z += monster.speed
+```
+
+Selain bergerak mendekati pemain, ukuran monster juga berubah berdasarkan jarak sehingga menghasilkan efek perspektif sederhana yang memberikan kesan kedalaman visual.
+
+---
+
+### Scoring System
+
+Sistem skor digunakan untuk memberikan poin kepada pemain setiap kali monster berhasil dikalahkan.
+
+```python
+if bullet_hit_monster:
+    score += 10
+```
+
+Semakin banyak monster yang berhasil ditembak, semakin tinggi skor yang diperoleh pemain.
+
+---
+
+### Rendering
+
+Seluruh elemen permainan seperti background, senjata, monster, skor, dan nyawa digabungkan ke dalam satu frame sebelum ditampilkan ke layar.
+
+```python
+cv2.imshow("Dark Invasion", frame)
+```
+
+Proses rendering dilakukan secara terus-menerus sehingga permainan dapat berjalan secara real-time dengan respons yang langsung terhadap gerakan pemain.
+
 
 ## Cara Menjalankan
 
