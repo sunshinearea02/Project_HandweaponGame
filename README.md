@@ -201,7 +201,7 @@ Tampilan akhir permainan ketika nyawa pemain habis. Skor akhir akan ditampilkan 
 ## Demo Video
 
 Berikut link video demonstrasi : 
-🔗 [Video Demonstrasi Dark Invasion](LINK_VIDEO_YOUTUBE)
+🔗 [Video Demonstrasi Dark Invasion](https://youtu.be/HLevUzgWXjU)
 
 ---
 
