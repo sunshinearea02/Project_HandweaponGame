@@ -75,38 +75,37 @@ Game ini menerapkan beberapa konsep utama, yaitu:
 ---
 
 ## Alur Program
-
-1. **Webcam Capture**
+1. **Webcam Capture**  
    Mengambil frame video secara real-time dari webcam.
 
-2. **Flip Frame & Crop ROI**
-   Membalik frame secara horizontal agar pergerakan tangan sesuai dengan arah gerakan pemain dan mengambil area deteksi tangan.
+2. **Flip Frame & Crop ROI**  
+   Membalik frame secara horizontal agar pergerakan tangan sesuai dengan arah gerakan pemain, kemudian mengambil area deteksi tangan.
 
-3. **HSV Conversion**
+3. **HSV Conversion**  
    Mengubah ruang warna frame dari BGR ke HSV.
 
-4. **Skin Color Masking**
+4. **Skin Color Masking**  
    Melakukan segmentasi warna kulit untuk memperoleh area kandidat tangan.
 
-5. **Manual Morphology (Opening & Closing)**
-   Membersihkan noise dan memperbaiki hasil segmentasi.
+5. **Manual Morphology (Opening & Closing)**  
+   Membersihkan noise dan memperbaiki hasil segmentasi menggunakan operasi morfologi.
 
-6. **Hand Contour Detection**
+6. **Hand Contour Detection**  
    Mencari kontur tangan dan menentukan posisi tangan yang terdeteksi.
 
-7. **Gesture Recognition**
+7. **Gesture Recognition**  
    Menganalisis pergerakan tangan untuk mengenali aksi menembak.
 
-8. **Weapon Position Update**
-   Memperbarui posisi senjata agar mengikuti posisi tangan.
+8. **Weapon Position Update**  
+   Memperbarui posisi senjata agar mengikuti posisi tangan secara real-time.
 
-9. **Game Logic Update**
-   Memperbarui posisi peluru, monster, skor, dan nyawa pemain.
+9. **Game Logic Update**  
+   Memperbarui posisi monster, peluru, skor, dan nyawa pemain.
 
-10. **Render Game Objects**
-    Menggambar seluruh objek permainan ke layar.
+10. **Render Game Objects**  
+    Menggambar background, senjata, monster, serta informasi permainan ke layar.
 
-11. **Display Frame**
+11. **Display Frame**  
     Menampilkan hasil akhir permainan secara real-time.
 
 ---
