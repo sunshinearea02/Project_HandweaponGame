@@ -37,25 +37,36 @@ Project ini dikembangkan **murni menggunakan Python, OpenCV, dan NumPy**, tanpa 
 - Webcam (cv2.VideoCapture)
 
 ---
-
 ## Struktur Folder
+Handweapon-Mini-Game/
 │
 ├── main.py
-├── backgroundgame.png
-├── weapon.png
-├── zombie_frames/
-│ ├── frame_1.png
-│ ├── frame_2.png
-│ └── ...
-└── README.md
+├── README.md
+│
+├── assets/
+│   ├── backgroundgame.png
+│   ├── weapon.png
+│   │
+│   └── zombie_frames/
+│       ├── frame_1.png
+│       ├── frame_2.png
+│       ├── frame_3.png
+│       └── ...
+│
+├── screenshots/
+│   ├── gameplay.png
+│   ├── menu.png
+│   └── gameover.png
+│
+└── demo/
+    └── link drive
 
 ## Cara Menjalankan
-
 ### 1. Install dependency
 ```bash
 pip install opencv-python numpy
 ```
-### 1. Jalankan Program
+### 2. Jalankan Program
 ```bash
 python main.py
 ```
