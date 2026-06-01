@@ -162,40 +162,41 @@ python main.py
 
 Tampilan awal permainan sebelum game dimulai. Pemain dapat menekan tombol **SPACE** untuk memulai permainan.
 
-![Menu](documentation/menu.png)
+<p align="center">
+  <img src="documentation/menu.png" width="500">
+</p>
 
----
+### Skin Masking
 
-### Gameplay
+Hasil segmentasi warna kulit pada ruang warna HSV setelah melalui proses morfologi. Area putih menunjukkan bagian tangan yang berhasil terdeteksi.
 
-Tampilan utama saat permainan berlangsung. Senjata mengikuti posisi tangan pemain dan monster akan muncul secara terus-menerus sebagai target.
-
-![Gameplay](documentation/play.png)
-
----
+<p align="center">
+  <img src="documentation/mask.png" width="500">
+</p>
 
 ### Hand Gesture Detection
 
 Proses deteksi tangan yang digunakan untuk mengontrol senjata dan mengenali gesture menembak berdasarkan pergerakan tangan.
 
-![Hand Gesture](documentation/hand%20gesture.png)
+<p align="center">
+  <img src="documentation/hand%20gesture.png" width="500">
+</p>
 
----
+### Gameplay
 
-### Skin Masking
+Tampilan utama saat permainan berlangsung. Senjata mengikuti posisi tangan pemain dan monster akan muncul secara terus-menerus sebagai target.
 
-Hasil segmentasi warna kulit pada ruang warna HSV setelah melalui proses morfologi. Area putih menunjukkan bagian tangan yang berhasil terdeteksi, sedangkan area hitam merupakan background yang diabaikan sistem.
-
-![Mask](documentation/mask.png)
-
----
+<p align="center">
+  <img src="documentation/play.png" width="500">
+</p>
 
 ### Game Over
 
 Tampilan akhir permainan ketika nyawa pemain habis. Skor akhir akan ditampilkan dan pemain dapat mengulang permainan dengan menekan tombol **R**.
 
-![Game Over](documentation/game%20over.png)
----
+<p align="center">
+  <img src="documentation/game%20over.png" width="500">
+</p>
 
 ## Demo Video
 
