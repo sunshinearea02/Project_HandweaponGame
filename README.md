@@ -1,8 +1,8 @@
 # DARK INVASION — Project Hand Weapon Mini Game
 ---
-Nama : Athaya Khairani Adi <br>
-NRP : 5024241007 <br>
-Mata Kuliah : Pengolahan Citra Video
+**Nama:** Athaya Khairani Adi  
+**NRP:** 5024241007  
+**Mata Kuliah:** Pengolahan Citra Video
 ---
 
 ## Daftar Isi
