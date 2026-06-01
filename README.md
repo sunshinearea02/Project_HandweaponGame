@@ -1,7 +1,7 @@
 # Handweapon Mini Game — Dark Invasion
 
 ##  Deskripsi Project
-**Handweapon Mini Game (Dark Invasion)** adalah game berbasis computer vision yang menggunakan deteksi tangan secara real-time sebagai kontrol utama senjata. Pemain mengarahkan weapon dengan posisi tangan dan melakukan gesture cepat untuk menembak zombie yang muncul di layar.
+**Handweapon Mini Game (Dark Invasion)** adalah game yang menggunakan deteksi tangan secara real-time sebagai kontrol utama senjata. Pemain mengarahkan weapon dengan posisi tangan dan melakukan gesture cepat untuk menembak zombie yang muncul di layar.
 
 Project ini dikembangkan **murni menggunakan Python, OpenCV, dan NumPy**, tanpa game engine atau framework tambahan.
 
