@@ -4,8 +4,6 @@
 **Nama:** Athaya Khairani Adi  
 **NRP:** 5024241007  
 
----
-
 ## Daftar Isi
 
 1. [Deskripsi Game](#-deskripsi-game)
