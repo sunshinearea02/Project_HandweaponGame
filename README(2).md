@@ -1,4 +1,4 @@
-#  DARK INVASION — Hand Weapon Mini Game
+#  DARK INVASION — Project Hand Weapon Mini Game
 
 Nama : Athaya Khairani Adi
 NRP : 5024241007
@@ -131,32 +131,10 @@ Game ini menerapkan berapa konsep yaitu :
 pip install opencv-python numpy
 ```
 
-### 2. Siapkan aset monster (jalankan sekali saja)
+### 2. Siapkan aset monster 
 
-Karena OpenCV tidak mendukung alpha channel GIF secara native, GIF monster perlu dikonversi ke PNG frames terlebih dahulu menggunakan script berikut yang dijalankan :
-
-```bash
-pip install Pillow  
-python convert_gif.py
-```
-
-Isi `convert_gif.py`:
-```python
-from PIL import Image
-import os
-
-gif = Image.open("PROJECT/monster.gif")
-os.makedirs("PROJECT/monster_frames", exist_ok=True)
-
-for i in range(gif.n_frames):
-    gif.seek(i)
-    frame = gif.convert("RGBA")
-    frame.save(f"PROJECT/monster_frames/frame_{i:03d}.png")
-
-print(f"Selesai! {gif.n_frames} frame tersimpan.")
-```
-
-> `convert_gif.py` hanya dijalankan **sekali untuk menyiapkan aset**. File ini tidak termasuk program game utama, sehingga game tetap murni OpenCV + NumPy.
+Jalankan file `convert_gif.py` satu kali untuk mengonversi animasi monster (.gif) menjadi kumpulan frame PNG yang digunakan oleh game.
+> `convert_gif.py` hanya dijalankan **sekali untuk menyiapkan aset** dan tidak perlu dilakukan setiap kali menjalankan game. File ini tidak termasuk program game utama, sehingga game tetap murni OpenCV + NumPy.
 
 ### 3. Jalankan game
 ```bash
@@ -199,7 +177,7 @@ Project_HandweaponGame/
 │       ├── frame_001.png
 │       └── ...
 └── documentation/
-    ├── menu.png
-    ├── gameplay.png
-    └── gameover.png
+    ├── menu.jpeg
+    ├── gameplay.jpeg
+    └── gameover.jpeg
 ```
