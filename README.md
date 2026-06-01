@@ -6,16 +6,15 @@
 
 ## Daftar Isi
 
-1. [Deskripsi Game](#-deskripsi-game)
-2. [Fitur Game](#-fitur-game)
-3. [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
-4. [Alur Program](#-alur-program)
-5. [Implementasi Teknis](#-implementasi-teknis)
-6. [Cara Menjalankan](#-cara-menjalankan)
-7. [Dokumentasi](#-dokumentasi)
-8. [Demo Video](#-demo-video)
-9. [Struktur Direktori](#-struktur-direktori)
-
+1. [Deskripsi Game](#deskripsi-game)
+2. [Fitur Game](#fitur-game)
+3. [Tools yang Digunakan](#tools-yang-digunakan)
+4. [Alur Program](#alur-program)
+5. [Implementasi Teknis](#implementasi-teknis)
+6. [Cara Menjalankan](#cara-menjalankan)
+7. [Dokumentasi](#dokumentasi)
+8. [Demo Video](#demo-video)
+9. [Struktur Direktori](#struktur-direktori)
 ---
 
 ## Deskripsi Game
@@ -63,7 +62,7 @@ Game ini menerapkan beberapa konsep utama, yaitu:
 
 ### Bahasa Pemrograman
 
-- Python 3.14.5
+- Python 3.14.4
 
 ### Library dan Modul
 
@@ -127,7 +126,7 @@ Game ini menerapkan beberapa konsep utama, yaitu:
 
 ---
 
-##  Cara Menjalankan
+## Cara Menjalankan
 
 ### 1. Install Dependency
 
@@ -221,6 +220,8 @@ dark-invasion/
 │       └── ...
 └── documentation/
     ├── menu.png
-    ├── gameplay.png
+    ├── hand gesture.png
+    ├── mask.png
+    ├── play.png
     └── gameover.png
 ```
