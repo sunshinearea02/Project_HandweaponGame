@@ -144,17 +144,21 @@ Kontur terbesar diasumsikan sebagai tangan dan digunakan untuk memperoleh koordi
 
 ### Gesture Recognition
 
-Aksi menembak ditentukan berdasarkan perubahan posisi tangan antar frame. Sistem membandingkan posisi tangan saat ini dengan posisi pada frame sebelumnya untuk menghitung besar pergerakan.
+Deteksi gesture pada sistem ini dilakukan dengan menganalisis pergerakan ujung atas tangan (topmost point) antar frame. Titik ini dianggap sebagai referensi utama untuk menangkap arah dan intensitas gerakan tangan pengguna.
 
+Setiap frame, sistem mengambil posisi current_top_x dan current_top_y, kemudian dibandingkan dengan posisi sebelumnya (prev_top_x, prev_top_y) untuk menghitung besar perpindahan.
+
+Jika nilai movement melebihi movement_threshold, maka sistem akan menganggap pengguna melakukan gesture SHOOT yang akan memicu aksi menembak (spawn peluru). Sebaliknya, jika nilai perpindahan kecil, sistem mempertahankan status HOLD sehingga tidak ada aksi yang dieksekusi.
 ```python
-speed = abs(cy - prev_cy)
+dx = current_top_x - prev_top_x
+dy = current_top_y - prev_top_y
+movement = np.sqrt(dx*dx + dy*dy)
 
-if speed > SHOOT_THRESHOLD:
-    shoot()
+gesture = "SHOOT" if movement > movement_threshold else "HOLD"
+
+prev_top_x = current_top_x
+prev_top_y = current_top_y
 ```
-
-Apabila perpindahan posisi melebihi nilai ambang yang ditentukan, sistem akan menganggap pemain melakukan gesture menembak (*SHOOT*) dan peluru akan dibuat.
-
 ---
 
 ### Weapon Overlay
@@ -175,10 +179,10 @@ Posisi senjata diperbarui pada setiap frame agar selalu mengikuti posisi tangan 
 Monster berfungsi sebagai target utama dalam permainan. Setiap monster memiliki posisi dan kecepatan yang diperbarui secara terus-menerus selama permainan berlangsung.
 
 ```python
-monster.z += monster.speed
+self.scale += self.speed
 ```
 
-Selain bergerak mendekati pemain, ukuran monster juga berubah berdasarkan jarak sehingga menghasilkan efek perspektif
+Selain itu, ukuran monster juga membesar berdasarkan nilai scale, sehingga menciptakan efek perspektif (semakin dekat, semakin besar).
 
 ---
 
