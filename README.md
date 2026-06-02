@@ -188,17 +188,26 @@ Selain itu, ukuran monster juga membesar berdasarkan nilai scale, sehingga menci
 
 ### Scoring System
 
-Sistem skor digunakan untuk memberikan poin kepada pemain setiap kali monster berhasil dikalahkan.
+Sistem skor pada game ini diberikan ketika peluru berhasil mengenai zombie. Deteksi tabrakan dilakukan dengan membandingkan posisi peluru dan zombie berdasarkan jarak koordinat pada setiap frame game loop.
+
+Jika posisi peluru berada dalam area hitbox zombie, maka dianggap terjadi collision. Pada kondisi ini, peluru dan zombie akan dihapus dari list aktif, dan skor pemain akan bertambah. Semakin banyak zombie yang berhasil terkena peluru, semakin tinggi skor yang diperoleh pemain.
 
 ```python
-if bullet_hit_monster:
-    score += 10
+# peluru ke zombie
+for bullet in bullets[:]:
+    for zombie in zombies[:]:
+
+        size = int(60 * zombie.scale)
+
+        if abs(bullet.x - zombie.x) < size and abs(bullet.y - zombie.y) < size:
+            bullets.remove(bullet)
+            zombies.remove(zombie)
+            score += 1
+            break
+
+bullets = [b for b in bullets if b.y > 0]
+zombies = [z for z in zombies if z.y < 600]
 ```
-
-Semakin banyak monster yang berhasil ditembak, semakin tinggi skor yang diperoleh pemain.
-
----
-
 ### Rendering
 
 Seluruh elemen permainan seperti background, senjata, monster, skor, dan nyawa digabungkan ke dalam satu frame sebelum ditampilkan ke layar.
